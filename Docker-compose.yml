@@ -1,0 +1,12 @@
+version: '3'
+services:
+  database:
+    image: postgres:latest
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: payments_svc
+      POSTGRES_PASSWORD: payments
+      POSTGRES_DB: payments
+    volumes:
+      - ./migrations:/docker-entrypoint-initdb.d

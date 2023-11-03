@@ -1,0 +1,19 @@
+wallet:
+  endpoint: http://mockoon.tools.getontop.com:3000/wallets
+payments:
+  endpoint: http://mockoon.tools.getontop.com:3000/api/v1/payments
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/payments
+    username: payments_svc
+    password: payments
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
