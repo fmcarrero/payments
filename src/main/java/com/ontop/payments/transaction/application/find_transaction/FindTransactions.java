@@ -1,6 +1,5 @@
 package com.ontop.payments.transaction.application.find_transaction;
 
-import com.ontop.payments.shared.pagination.CursorBasedPageable;
 import com.ontop.payments.shared.pagination.PageResponse;
 import com.ontop.payments.transaction.domain.Transaction;
 import com.ontop.payments.transaction.domain.TransactionRepository;
@@ -16,7 +15,7 @@ public class FindTransactions {
         this.transactionRepository = transactionRepository;
     }
 
-    public List<Transaction> execute(Long cursorId, int size) {
+    public PageResponse<List<Transaction>> execute(Long cursorId, int size) {
         return this.transactionRepository.FindAll(cursorId, size);
     }
 }

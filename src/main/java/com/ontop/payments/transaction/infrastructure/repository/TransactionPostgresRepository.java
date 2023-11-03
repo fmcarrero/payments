@@ -1,11 +1,13 @@
 package com.ontop.payments.transaction.infrastructure.repository;
 
+import com.ontop.payments.shared.pagination.PageResponse;
 import com.ontop.payments.transaction.domain.Transaction;
 import com.ontop.payments.transaction.domain.TransactionRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class TransactionPostgresRepository implements TransactionRepository {
@@ -25,15 +27,16 @@ public class TransactionPostgresRepository implements TransactionRepository {
     }
 
     @Override
-    public List<Transaction> FindAll(Long cursorId, int size) {
-        PageRequest pageRequest = PageRequest.of(0, size);
-
-        if (cursorId != null) {
-            return toDomain(transactionJpaRepository.findByOrderByIdDesc(pageRequest));
-        } else {
-            return toDomain(transactionJpaRepository.findByOrderByIdDesc(pageRequest));
+    public PageResponse<List<Transaction>> FindAll(Long cursorId, int size) {
+        List<Transaction> transactions = this.toDomain( this.transactionJpaRepository.findByCursorId(cursorId, PageRequest.of(0, size)));
+        Optional<Long> nextCursorId = Optional.empty();
+        Optional<Long> prevCursorId = Optional.empty();
+        if (!transactions.isEmpty()) {
+            nextCursorId = this.transactionJpaRepository.findNextCursorId(transactions.get(transactions.size() - 1).getId());
+            prevCursorId = this.transactionJpaRepository.findPreviousCursorId(transactions.get(0).getId());
         }
 
+        return new PageResponse<>(transactions,  prevCursorId.orElse(null),nextCursorId.orElse(null));
     }
 
     private  List<Transaction> toDomain(List<TransactionJpaEntity> entities) {
