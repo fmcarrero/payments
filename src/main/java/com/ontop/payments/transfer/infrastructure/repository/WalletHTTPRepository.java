@@ -11,6 +11,7 @@ import com.ontop.payments.transfer.infrastructure.exception.WalletHTTPRepository
 import com.ontop.payments.transfer.infrastructure.repository.response.BalanceWalletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;

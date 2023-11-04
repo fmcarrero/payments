@@ -1,6 +1,5 @@
 package com.ontop.payments.transfer.domain;
 
-import com.ontop.payments.recipient.domain.Recipient;
 import lombok.Builder;
 import lombok.Data;
 

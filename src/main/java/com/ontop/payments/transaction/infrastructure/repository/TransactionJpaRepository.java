@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TransactionJpaRepository extends JpaRepository<TransactionJpaEntity, Long>, PagingAndSortingRepository<TransactionJpaEntity, Long>, JpaSpecificationExecutor<TransactionJpaEntity> {
-    // No necesitas definir ningún método aquí, Spring Data implementará los necesarios por ti
 }

@@ -4,7 +4,6 @@ import com.ontop.payments.shared.pagination.PageResponse;
 import com.ontop.payments.transaction.application.command.TransactionSearchCriteriaCommand;
 import com.ontop.payments.transaction.domain.Transaction;
 import com.ontop.payments.transaction.domain.TransactionRepository;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
