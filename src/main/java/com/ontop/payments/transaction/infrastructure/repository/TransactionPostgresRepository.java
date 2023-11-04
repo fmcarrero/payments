@@ -24,8 +24,7 @@ public class TransactionPostgresRepository implements TransactionRepository {
     public Transaction save(Transaction transaction) {
         TransactionJpaEntity entity = toJpaEntity(transaction);
         TransactionJpaEntity savedEntity = transactionJpaRepository.save(entity);
-        transaction.setCreatedAt(savedEntity.getCreatedAt());
-        return transaction;
+        return toDomain(savedEntity);
     }
 
     @Override
@@ -69,7 +68,6 @@ public class TransactionPostgresRepository implements TransactionRepository {
                 .userId(transaction.getUserId())
                 .paymentId(transaction.getPaymentId())
                 .walletId(transaction.getWalletId())
-                .createdAt(transaction.getCreatedAt())
                 .build();
     }
 }

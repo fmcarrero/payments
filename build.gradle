@@ -15,11 +15,12 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compileOnly 'org.projectlombok:lombok:1.18.30'
-	annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.postgresql:postgresql:42.2.27'
+	testImplementation 'com.github.javafaker:javafaker:1.0.2'
 }
 
 sourceSets {
@@ -44,7 +45,7 @@ task integrationTest(type: Test) {
 
 	outputs.upToDateWhen { false }
 	mustRunAfter test
-
+	
 	useJUnitPlatform()
 }
 
@@ -53,4 +54,19 @@ check.dependsOn integrationTest
 tasks.named('test') {
 	useJUnitPlatform()
 	exclude '**/*IntegrationTest.class'
+}
+processResources {
+	// Define una estrategia de manejo de duplicados para recursos
+	duplicatesStrategy = 'exclude'
+}
+
+processTestResources {
+	// Define una estrategia de manejo de duplicados para recursos de prueba
+	duplicatesStrategy = 'exclude'
+}
+
+// Y si tienes una tarea específica para recursos de pruebas de integración, también necesitas:
+processIntegrationTestResources {
+	// Define una estrategia de manejo de duplicados para recursos de pruebas de integración
+	duplicatesStrategy = 'exclude'
 }
