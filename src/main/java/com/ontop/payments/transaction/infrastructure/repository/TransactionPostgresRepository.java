@@ -1,13 +1,16 @@
 package com.ontop.payments.transaction.infrastructure.repository;
 
 import com.ontop.payments.shared.pagination.PageResponse;
+import com.ontop.payments.transaction.application.command.TransactionSearchCriteriaCommand;
 import com.ontop.payments.transaction.domain.Transaction;
 import com.ontop.payments.transaction.domain.TransactionRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class TransactionPostgresRepository implements TransactionRepository {
@@ -27,16 +30,21 @@ public class TransactionPostgresRepository implements TransactionRepository {
     }
 
     @Override
-    public PageResponse<List<Transaction>> FindAll(Long cursorId, int size) {
-        List<Transaction> transactions = this.toDomain( this.transactionJpaRepository.findByCursorId(cursorId, PageRequest.of(0, size)));
-        Optional<Long> nextCursorId = Optional.empty();
-        Optional<Long> prevCursorId = Optional.empty();
-        if (!transactions.isEmpty()) {
-            nextCursorId = this.transactionJpaRepository.findNextCursorId(transactions.get(transactions.size() - 1).getId());
-            prevCursorId = this.transactionJpaRepository.findPreviousCursorId(transactions.get(0).getId());
+    public PageResponse<List<Transaction>> FindAll(TransactionSearchCriteriaCommand searchCriteria) {
+        PageRequest pageRequest = PageRequest.of(searchCriteria.getPage(), searchCriteria.getSize(), Sort.Direction.DESC, "id");
+
+        Specification<TransactionJpaEntity> spec = Specification.where(null);
+
+        if (searchCriteria.getAmount() != null) {
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("amount"), searchCriteria.getAmount()));
         }
 
-        return new PageResponse<>(transactions,  prevCursorId.orElse(null),nextCursorId.orElse(null));
+        if (searchCriteria.getCreatedAtStart() != null && searchCriteria.getCreatedAtEnd() != null) {
+            spec = spec.and((root, query, cb) -> cb.between(root.get("createdAt"), searchCriteria.getCreatedAtStart(), searchCriteria.getCreatedAtEnd()));
+        }
+        var response = this.transactionJpaRepository.findAll(spec, pageRequest);
+
+        return new PageResponse<>(this.toDomain(response.getContent()), response.getTotalElements());
     }
 
     private  List<Transaction> toDomain(List<TransactionJpaEntity> entities) {

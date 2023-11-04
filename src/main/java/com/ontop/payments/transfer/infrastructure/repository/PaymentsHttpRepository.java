@@ -7,7 +7,6 @@ import com.ontop.payments.transfer.domain.Transfer;
 import com.ontop.payments.transfer.domain.TransferStatus;
 import com.ontop.payments.transfer.domain.repository.PaymentsRepository;
 import com.ontop.payments.transfer.infrastructure.exception.WalletHTTPRepositoryException;
-import com.ontop.payments.transfer.infrastructure.repository.response.BalanceWalletResponse;
 import org.springframework.stereotype.Repository;
 
 import java.net.URI;
