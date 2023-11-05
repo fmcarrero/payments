@@ -6,6 +6,8 @@ import com.ontop.payments.recipient.domain.RecipientRepository;
 import com.ontop.payments.shared.SnowflakeIdGenerator;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class SaveRecipients {
 
@@ -30,6 +32,7 @@ public class SaveRecipients {
                 .nationalIdentificationNumber(createRecipientCommand.getNationalIdentificationNumber())
                 .accountNumber(createRecipientCommand.getAccountNumber())
                 .bankName(createRecipientCommand.getBankName())
+                .createdAt(LocalDateTime.now())
                 .userId(userId)
                 .build();
     }

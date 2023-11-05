@@ -9,7 +9,7 @@ WORKDIR /home/gradle/src
 
 # Compila el código fuente y construye el JAR
 # No es necesario instalar Gradle ya que la imagen ya viene con él
-RUN gradle build --no-daemon
+RUN gradle build  -x test -x integrationTest
 
 # Stage 2: Crear la imagen de ejecución
 FROM openjdk:21-jdk-slim

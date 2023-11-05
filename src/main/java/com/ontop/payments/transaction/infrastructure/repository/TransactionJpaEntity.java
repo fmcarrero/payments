@@ -34,7 +34,6 @@ public class TransactionJpaEntity {
     @Column(name = "wallet_id")
     private long walletId;
 
-    @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 }

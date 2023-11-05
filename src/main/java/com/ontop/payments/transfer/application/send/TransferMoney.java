@@ -17,6 +17,8 @@ import com.ontop.payments.transfer.domain.repository.UserAccountRepository;
 import com.ontop.payments.transfer.domain.repository.WalletRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class TransferMoney {
     private final WalletRepository walletRepository;
@@ -65,6 +67,7 @@ public class TransferMoney {
                         .userId(transfer.getSource().getUserId())
                         .paymentId(response.getId())
                         .walletId(walletTransaction.getWalletTransactionId())
+                        .createdAt(LocalDateTime.now())
                         .build());
     }
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TransactionRepository {
     Transaction save(Transaction transaction);
-    PageResponse<List<Transaction>> FindAll(TransactionSearchCriteriaCommand criteria) ;
+    PageResponse<List<Transaction>> findAll(TransactionSearchCriteriaCommand criteria) ;
 }

@@ -28,7 +28,7 @@ public class TransactionPostgresRepository implements TransactionRepository {
     }
 
     @Override
-    public PageResponse<List<Transaction>> FindAll(TransactionSearchCriteriaCommand searchCriteria) {
+    public PageResponse<List<Transaction>> findAll(TransactionSearchCriteriaCommand searchCriteria) {
         PageRequest pageRequest = PageRequest.of(searchCriteria.getPage(), searchCriteria.getSize(), Sort.Direction.DESC, "id");
 
         Specification<TransactionJpaEntity> spec = Specification.where(null);
@@ -68,6 +68,7 @@ public class TransactionPostgresRepository implements TransactionRepository {
                 .userId(transaction.getUserId())
                 .paymentId(transaction.getPaymentId())
                 .walletId(transaction.getWalletId())
+                .createdAt(transaction.getCreatedAt())
                 .build();
     }
 }

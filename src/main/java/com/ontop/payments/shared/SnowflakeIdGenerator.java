@@ -1,11 +1,10 @@
 package com.ontop.payments.shared;
 
 public class SnowflakeIdGenerator {
-    private static final long EPOCH = 1633564800000L; // Una fecha de inicio arbitraria, como 2021-10-07
+    private static final long EPOCH = 1633564800000L;
 
     private static final long SEQUENCE_BITS = 12;
     private static final long NODE_ID_BITS = 10;
-    private static final long TIMESTAMP_BITS = 41;
 
     private static final long MAX_NODE_ID = (1L << NODE_ID_BITS) - 1;
     private static final long MAX_SEQUENCE = (1L << SEQUENCE_BITS) - 1;

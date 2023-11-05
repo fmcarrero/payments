@@ -45,7 +45,6 @@ public class RecipientJpaEntity {
     @Column(name = "bank_name")
     private String bankName;
 
-    @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 

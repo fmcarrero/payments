@@ -18,7 +18,7 @@ public class FindTransaction {
     }
 
     public  PageResponse<List<Transaction>> execute(@ModelAttribute TransactionSearchCriteriaCommand criteria) {
-        return this.transactionRepository.FindAll(criteria);
+        return this.transactionRepository.findAll(criteria);
     }
 }
 

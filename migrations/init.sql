@@ -17,3 +17,19 @@ CREATE TABLE public.recipients (
                                    currency varchar(10) NOT NULL DEFAULT 'USD'::character varying,
                                    CONSTRAINT recipients_pk PRIMARY KEY (id)
 );
+
+-- public.transactions definition
+
+-- Drop table
+
+-- DROP TABLE public.transactions;
+
+CREATE TABLE public.transactions (
+                                     id numeric NOT NULL,
+                                     amount numeric NOT NULL,
+                                     user_id numeric NOT NULL,
+                                     payment_id varchar(255) NULL,
+                                     wallet_id numeric NULL,
+                                     created_at timestamp NULL,
+                                     CONSTRAINT transactions_pkey PRIMARY KEY (id)
+);

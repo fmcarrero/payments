@@ -51,6 +51,7 @@ public class RecipientPostgresRepository implements RecipientRepository {
                .lastName(recipient.getLastName())
                .nationalIdentificationNumber(recipient.getNationalIdentificationNumber())
                .bankName(recipient.getBankName())
+               .createdAt(recipient.getCreatedAt())
                .routingNumber(recipient.getRoutingNumber())
                .accountNumber(recipient.getAccountNumber())
                .userId(recipient.getUserId())
