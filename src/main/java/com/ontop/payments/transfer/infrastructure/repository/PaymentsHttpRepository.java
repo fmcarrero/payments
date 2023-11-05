@@ -48,7 +48,7 @@ public class PaymentsHttpRepository implements PaymentsRepository {
                         .id(paymentProviderResponse.getPaymentInfo().getId())
                         .build();
             } else {
-                throw new WalletHTTPRepositoryException("Failed to get balance . Status code: " + response.statusCode());
+                throw new WalletHTTPRepositoryException("Failed to doing payment . Status code: " + response.statusCode());
             }
 
         } catch (Exception e) {
