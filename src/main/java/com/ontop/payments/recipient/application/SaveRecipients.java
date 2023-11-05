@@ -19,6 +19,11 @@ public class SaveRecipients {
         this.recipientRepository = recipientRepository;
     }
 
+    /**
+     * @param userId the user id
+     * @param createRecipientCommand the command
+     * @return the saved recipient
+     */
     public Recipient execute(Long userId, CreateRecipientCommand createRecipientCommand){
         Recipient recipient = commandToRecipient(createRecipientCommand,userId);
         return this.recipientRepository.save(recipient);
@@ -33,6 +38,7 @@ public class SaveRecipients {
                 .accountNumber(createRecipientCommand.getAccountNumber())
                 .bankName(createRecipientCommand.getBankName())
                 .createdAt(LocalDateTime.now())
+                .currency(createRecipientCommand.getCurrency())
                 .userId(userId)
                 .build();
     }

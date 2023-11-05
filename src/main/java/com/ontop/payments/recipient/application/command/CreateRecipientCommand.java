@@ -1,9 +1,11 @@
 package com.ontop.payments.recipient.application.command;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class CreateRecipientCommand {
     @JsonProperty("first_name")
     private  String firstName;
