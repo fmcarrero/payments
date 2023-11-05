@@ -18,8 +18,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.postgresql:postgresql:42.2.27'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'com.github.javafaker:javafaker:1.0.2'
 }
 
