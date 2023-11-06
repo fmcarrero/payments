@@ -4,7 +4,7 @@ payments:
   endpoint: http://mockoon.tools.getontop.com:3000/api/v1/payments
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/payments
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/payments
     username: payments_svc
     password: payments
     driver-class-name: org.postgresql.Driver
