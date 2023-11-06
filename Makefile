@@ -6,4 +6,4 @@ build-image-build:
 run-test:
 		./gradlew test
 run-integration-test:
-		docker-compose -f Docker-compose.ci.yml  run --rm  --build app sh -c "./gradlew integrationTest"
+		docker-compose -f Docker-compose.ci.yml  run  app sh -c "./gradlew integrationTest"
