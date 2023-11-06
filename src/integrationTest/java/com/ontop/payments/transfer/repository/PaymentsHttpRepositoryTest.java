@@ -51,6 +51,7 @@ class PaymentsHttpRepositoryTest {
         transfer.setDestination(Recipient.builder()
                         .bankName("BANK OF AMERICA")
                         .routingNumber("211927207")
+                        .nationalIdentificationNumber("123456789")
                         .lastName(faker.name().lastName())
                         .firstName(faker.name().firstName())
                         .userId(userId)
