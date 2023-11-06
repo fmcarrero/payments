@@ -1,24 +1,24 @@
-# Stage 1: Construir el JAR con Gradle
+# Stage 1: build the jar
 FROM gradle:8.4.0-jdk21 AS build
 
-# Copia el código fuente al contenedor
+# copy the project files
 COPY --chown=gradle:gradle . /home/gradle/src
 
-# Establece el directorio de trabajo
+# set the working directory
 WORKDIR /home/gradle/src
 
-# Compila el código fuente y construye el JAR
-# No es necesario instalar Gradle ya que la imagen ya viene con él
+# compile and build the jar
+# it isn't necessary to run the tests to build the jar
 RUN gradle build  -x test -x integrationTest
 
-# Stage 2: Crear la imagen de ejecución
+# Stage 2: create the docker final image
 FROM openjdk:21-jdk-slim
 
-# Copia el JAR del stage de construcción al stage de ejecución
+# copy the jar file to the container
 COPY --from=build /home/gradle/src/build/libs/payments-0.0.1-SNAPSHOT.jar /app/myapp.jar
 
-# Expone el puerto en el que tu aplicación se ejecutará
+# expose port 8080
 EXPOSE 8080
 
-# Ejecuta la aplicación
+# run the application
 ENTRYPOINT ["java", "-jar", "/app/myapp.jar"]

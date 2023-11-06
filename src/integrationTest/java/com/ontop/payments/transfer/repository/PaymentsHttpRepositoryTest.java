@@ -31,6 +31,7 @@ class PaymentsHttpRepositoryTest {
         var response = paymentsHttpRepository.PaymentProvider(transfer);
 
         assertThat(response).isNotNull();
+        assertThat(response.getId()).isNotNull();
     }
 
     private Transfer createTestTransfer() {
