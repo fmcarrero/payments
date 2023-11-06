@@ -41,10 +41,6 @@ public class Transfer {
         this.status = TransferStatus.PENDING;
     }
 
-    public boolean isCompleted() {
-        return this.status == TransferStatus.COMPLETED;
-    }
-
     @Data
     @Builder
     public static class SourceInformation {

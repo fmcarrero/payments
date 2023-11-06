@@ -7,7 +7,7 @@ import com.ontop.payments.transfer.domain.Balance;
 import com.ontop.payments.transfer.domain.Transfer;
 import com.ontop.payments.transfer.domain.WalletTransaction;
 import com.ontop.payments.transfer.domain.repository.WalletRepository;
-import com.ontop.payments.transfer.infrastructure.exception.WalletHTTPRepositoryException;
+import com.ontop.payments.transfer.infrastructure.exception.WalletHttpRepositoryException;
 import com.ontop.payments.transfer.infrastructure.repository.response.BalanceWalletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
@@ -48,7 +48,7 @@ public class WalletHTTPRepository implements WalletRepository {
                 BalanceWalletResponse balanceResponse = objectMapper.readValue(response.body(), BalanceWalletResponse.class);
                 return new Balance(balanceResponse.getBalance(),balanceResponse.getUserId());
             } else {
-                throw new WalletHTTPRepositoryException("Failed to get balance for user: " + userId + ". Status code: " + response.statusCode());
+                throw new WalletHttpRepositoryException("Failed to get balance for user: " + userId + ". Status code: " + response.statusCode());
             }
 
         } catch (Exception e) {
@@ -72,7 +72,7 @@ public class WalletHTTPRepository implements WalletRepository {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() != HttpStatus.OK.value()) {
-                throw new WalletHTTPRepositoryException("Failed to save transaction. Status code: " + response.statusCode());
+                throw new WalletHttpRepositoryException("Failed to save transaction. Status code: " + response.statusCode());
             }
             Map<String, Object> responseMap = objectMapper.readValue(response.body(), new TypeReference<>() {});
             return new WalletTransaction((Integer) responseMap.get("wallet_transaction_id"), transfer.getTotalWithdrawal(), transfer.getSource().getUserId());

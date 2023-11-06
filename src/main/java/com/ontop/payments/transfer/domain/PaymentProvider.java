@@ -7,7 +7,4 @@ import lombok.Data;
 @Builder
 public class PaymentProvider {
     private String id;
-    public boolean isCompleted() {
-        return true;
-    }
 }

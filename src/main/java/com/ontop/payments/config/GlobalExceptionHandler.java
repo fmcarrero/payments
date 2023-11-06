@@ -5,7 +5,7 @@ import com.ontop.payments.transfer.domain.exception.InsufficientFundsException;
 import com.ontop.payments.transfer.domain.exception.InvalidAmountException;
 import com.ontop.payments.transfer.domain.exception.InvalidUserException;
 import com.ontop.payments.transfer.domain.exception.RecipientNotFoundException;
-import com.ontop.payments.transfer.infrastructure.exception.WalletHTTPRepositoryException;
+import com.ontop.payments.transfer.infrastructure.exception.WalletHttpRepositoryException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -34,8 +34,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
-    @ExceptionHandler(WalletHTTPRepositoryException.class)
-    public ResponseEntity<?> handleInvalidAmountException(WalletHTTPRepositoryException ex, WebRequest request) {
+    @ExceptionHandler(WalletHttpRepositoryException.class)
+    public ResponseEntity<?> handleInvalidAmountException(WalletHttpRepositoryException ex, WebRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), request.getDescription(false));
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
@@ -45,6 +45,13 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), request.getDescription(false));
         return ResponseEntity.badRequest().body(errorResponse);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> handleInvalidAmountException(IllegalArgumentException ex, WebRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), request.getDescription(false));
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGenericException(Exception ex, WebRequest request) {

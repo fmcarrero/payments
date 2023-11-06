@@ -42,21 +42,14 @@ public class TransferMoney {
         Transfer transfer = new Transfer(transferCommand);
         Balance balance = this.walletRepository.getBalanceByUser(transfer.getSource().getUserId());
 
-        if (balance.getBalance() < transfer.getTotalWithdrawal()){
-            throw new InsufficientFundsException("Insufficient Funds Attempted to transfer " + transfer.getTotalWithdrawal() + " but only have " + balance.getBalance());
-        }
+        checkBalance(balance, transfer);
 
         Recipient recipient = this.recipientRepository.getRecipientByIdAndUser( transfer.getDestination().getId(), transfer.getSource().getUserId())
                 .orElseThrow(() -> new RecipientNotFoundException("Recipient id " + transfer.getDestination().getId() + " not found"));
         transfer.setDestination(recipient);
         var source = this.userAccountRepository.getUserAccount(transfer.getSource().getUserId(),transferCommand.getSource().getSourceId());
         transfer.setSource(source);
-        transfer.setSourceInformation(Transfer.SourceInformation.builder().name("").build());
         PaymentProvider response = this.paymentsRepository.PaymentProvider(transfer);
-
-        if (!response.isCompleted()){
-            throw new RuntimeException("Error payment service");
-        }
 
         WalletTransaction walletTransaction = this.walletRepository.saveTransaction(transfer);
 
@@ -69,5 +62,11 @@ public class TransferMoney {
                         .walletId(walletTransaction.getWalletTransactionId())
                         .createdAt(LocalDateTime.now())
                         .build());
+    }
+
+    private static void checkBalance(Balance balance, Transfer transfer) {
+        if (balance.getBalance() < transfer.getTotalWithdrawal()){
+            throw new InsufficientFundsException("Insufficient Funds Attempted to transfer " + transfer.getTotalWithdrawal() + " but only have " + balance.getBalance());
+        }
     }
 }

@@ -5,12 +5,12 @@ import com.ontop.payments.transfer.application.command.TransferCommand;
 import com.ontop.payments.transfer.application.send.TransferMoney;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class TransferController {
 
     public final TransferMoney transferMoney;
@@ -21,9 +21,19 @@ public class TransferController {
 
     @PostMapping("/transfers")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Transaction> transfer(@RequestBody TransferCommand transferCommand){
+    public ResponseEntity<CreateTransferResponse> transfer(@RequestBody TransferCommand transferCommand){
         Transaction transaction = this.transferMoney.Execute(transferCommand);
 
-        return ResponseEntity.ok(transaction);
+        return ResponseEntity.ok(createTestTransfer(transaction));
+    }
+    private CreateTransferResponse createTestTransfer(Transaction transaction) {
+        return  CreateTransferResponse.builder()
+                .amount(transaction.getAmount())
+                .userId(transaction.getUserId())
+                .createdAt(transaction.getCreatedAt())
+                .id(transaction.getId())
+                .paymentId(transaction.getPaymentId())
+                .walletId(transaction.getWalletId())
+                .build();
     }
 }

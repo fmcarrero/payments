@@ -6,7 +6,7 @@ import com.ontop.payments.transfer.domain.PaymentProvider;
 import com.ontop.payments.transfer.domain.Transfer;
 import com.ontop.payments.transfer.domain.TransferStatus;
 import com.ontop.payments.transfer.domain.repository.PaymentsRepository;
-import com.ontop.payments.transfer.infrastructure.exception.WalletHTTPRepositoryException;
+import com.ontop.payments.transfer.infrastructure.exception.WalletHttpRepositoryException;
 import org.springframework.stereotype.Repository;
 
 import java.net.URI;
@@ -48,7 +48,7 @@ public class PaymentsHttpRepository implements PaymentsRepository {
                         .id(paymentProviderResponse.getPaymentInfo().getId())
                         .build();
             } else {
-                throw new WalletHTTPRepositoryException("Failed to doing payment . Status code: " + response.statusCode());
+                throw new WalletHttpRepositoryException("Failed to doing payment . Status code: " + response.statusCode());
             }
 
         } catch (Exception e) {
