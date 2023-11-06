@@ -22,7 +22,7 @@ public class TransferController {
     @PostMapping("/transfers")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<CreateTransferResponse> transfer(@RequestBody TransferCommand transferCommand){
-        Transaction transaction = this.transferMoney.Execute(transferCommand);
+        Transaction transaction = this.transferMoney.execute(transferCommand);
 
         return ResponseEntity.ok(createTestTransfer(transaction));
     }

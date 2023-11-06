@@ -1,0 +1,116 @@
+{
+  "info": {
+    "_postman_id": "95e9fe0c-8b3f-4587-92cf-51742cac1f92",
+    "name": "personal_projects",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "2938871"
+  },
+  "item": [
+    {
+      "name": "ontop",
+      "item": [
+        {
+          "name": "transfer",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"amount\": 2100,\n    \"source\" : {\n        \"user_id\": 1000\n    },\n    \"destination\": {\n        \"recipient_id\": 274218364308557824\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/transfers",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "transfers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "recipients",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"first_name\": \"{{$randomFirstName}}\",\n    \"last_name\": \"{{$randomLastName}}\",\n    \"routing_number\": \"{{$randomBankAccount}}\",\n    \"national_identification_number\": \"{{$randomAlphaNumeric}}\",\n    \"account_number\": \"{{$randomBankAccount}}\",\n    \"bank_name\": \"{{$randomBankAccountName}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/users/:id/recipients",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "users",
+                ":id",
+                "recipients"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1000"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "transactions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/transactions?size=20&amount=2310&created_at_start=2023-11-03T00:00:00&created_at_end=2023-11-03T14:59:59",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "transactions"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "20"
+                },
+                {
+                  "key": "amount",
+                  "value": "2310"
+                },
+                {
+                  "key": "created_at_start",
+                  "value": "2023-11-03T00:00:00"
+                },
+                {
+                  "key": "created_at_end",
+                  "value": "2023-11-03T14:59:59"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

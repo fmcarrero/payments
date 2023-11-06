@@ -38,7 +38,8 @@ public class TransferMoney {
         this.snowflakeIdGenerator = snowflakeIdGenerator;
         this.userAccountRepository = userAccountRepository;
     }
-    public Transaction Execute(TransferCommand transferCommand){
+
+    public Transaction execute(TransferCommand transferCommand) {
         Transfer transfer = new Transfer(transferCommand);
         Balance balance = this.walletRepository.getBalanceByUser(transfer.getSource().getUserId());
 

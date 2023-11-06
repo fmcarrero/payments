@@ -6,17 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class UserAccount {
-    /*
-    "type": "COMPANY",
-        "sourceInformation": {
-            "name": "ONTOP INC"
-        },
-        "account": {
-            "accountNumber": "0245253419",
-            "currency": "USD",
-            "routingNumber": "028444018"
-        }
-     */
     private long userId;
     private long accountId;
     private String currency;

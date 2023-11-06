@@ -25,6 +25,10 @@ The application is organized around three main entities: `Recipient`, `Transfer`
 - `application`: Hosts the application logic, defining use cases and orchestrating between the infrastructure and domain layers.
 - `domain`: Defines the business models and core business logic.
 
+The following diagram illustrates the Hexagonal Architecture pattern:
+
+- ![hexagonal.webp](docs%2Fimg%2Fhexagonal.webp)
+
 ## Technologies Used
 
 - **Programming Language:** Java 21
@@ -67,7 +71,8 @@ The Criteria API used in this application provides a robust and scalable approac
 
 - **Sorting:** Transactions are sorted by their creation date in descending order by default, providing an immediate view of the most recent activity.
 - **Filtering:** Users can specify filters for transaction amounts and dates, making it easy to drill down to the exact data set required.
-- **Pagination:** The paginated results are presented in a user-friendly format, with the total number of transactions displayed at the top of the page and the current page number and size shown at the bottom.
+- **Pagination:** The paginated results are presented in a user-friendly format, with the total number of transactions
+  displayed.
 
 
 ## How to Use
